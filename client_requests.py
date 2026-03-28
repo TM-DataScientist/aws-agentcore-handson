@@ -1,19 +1,25 @@
-import json
 import sys
 
 import requests
 
 
+# ローカルで起動している AgentCore サーバーの URL。
 URL = "http://localhost:8080/invocations"
+
+# JSON を送るだけなのでヘッダーは最小限でよい。
 HEADERS = {"Content-Type": "application/json"}
+
+# 入力が空だったときのデフォルトメッセージ。
 DEFAULT_PROMPT = "Hello"
 
 
 def extract_result_text(response_data: dict) -> str:
+    """サーバー応答から、人が読みたい本文だけを取り出す。"""
     result = response_data.get("result")
     if isinstance(result, str):
         return result
 
+    # 将来 result が構造化されても text を拾えるようにしておく。
     if isinstance(result, dict):
         content = result.get("content", [])
         if content and isinstance(content[0], dict) and isinstance(content[0].get("text"), str):
@@ -31,6 +37,8 @@ def extract_result_text(response_data: dict) -> str:
 
 
 def call_local_server():
+    """ローカルサーバーに prompt を送り、回答を表示する。"""
+    # 引数があれば引数を使い、なければ対話入力にする。
     if len(sys.argv) > 1:
         prompt = sys.argv[1]
     else:
@@ -52,13 +60,13 @@ def call_local_server():
         result_text = extract_result_text(response_data)
         print(f"\n  >> エージェントの回答: {result_text}")
     except requests.exceptions.ConnectionError:
-        print(f"\n[エラー] サーバーへの接続に失敗しました。", file=sys.stderr)
+        print("\n[エラー] サーバーへの接続に失敗しました。", file=sys.stderr)
         print(f"{URL} が起動しているか確認してください。", file=sys.stderr)
     except requests.exceptions.HTTPError as exc:
-        print(f"\n[エラー] HTTPエラーが発生しました。", file=sys.stderr)
+        print("\n[エラー] HTTPエラーが発生しました。", file=sys.stderr)
         print(f"詳細: {exc}", file=sys.stderr)
     except requests.exceptions.JSONDecodeError:
-        print(f"\n[エラー] サーバー応答を JSON として解釈できません。", file=sys.stderr)
+        print("\n[エラー] サーバー応答を JSON として解釈できません。", file=sys.stderr)
         print(f"応答本文: {response.text[:200]}...", file=sys.stderr)
     except Exception as exc:
         print(f"\n[エラー] 予期しないエラーが発生しました: {exc}", file=sys.stderr)
