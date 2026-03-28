@@ -1,0 +1,35 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowCreateAndReadVectorBucket",
+      "Effect": "Allow",
+      "Action": [
+        "s3vectors:CreateVectorBucket",
+        "s3vectors:GetVectorBucket"
+      ],
+      "Resource": "arn:aws:s3vectors:us-east-1:927852416082:bucket/*"
+    },
+    {
+      "Sid": "AllowCreateAndReadVectorIndex",
+      "Effect": "Allow",
+      "Action": [
+        "s3vectors:CreateIndex",
+        "s3vectors:GetIndex"
+      ],
+      "Resource": "arn:aws:s3vectors:us-east-1:927852416082:bucket/*/index/*"
+    },
+    {
+      "Sid": "AllowListIndexes",
+      "Effect": "Allow",
+      "Action": "s3vectors:ListIndexes",
+      "Resource": "arn:aws:s3vectors:us-east-1:927852416082:bucket/*"
+    },
+    {
+      "Sid": "AllowListVectorBuckets",
+      "Effect": "Allow",
+      "Action": "s3vectors:ListVectorBuckets",
+      "Resource": "*"
+    }
+  ]
+}

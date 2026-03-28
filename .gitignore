@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Packaging and test artifacts
+build/
+dist/
+*.egg-info/
+.pytest_cache/
+.coverage
+.coverage*
+htmlcov/
+.tox/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Logs and runtime outputs
+*.log
+*.out
+*.stderr.log
+*.stdout.log
+
+# Tool caches
+.uv-cache/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Bedrock AgentCore local runtime state
+.bedrock_agentcore/
+.bedrock_agentcore.yaml
