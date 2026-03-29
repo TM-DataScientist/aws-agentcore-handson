@@ -1,4 +1,5 @@
 import json
+import os
 import sys
 import uuid
 
@@ -6,6 +7,10 @@ import boto3
 
 
 client = boto3.client("bedrock-agentcore", region_name="us-east-1")
+AGENT_RUNTIME_ARN = os.getenv("BEDROCK_AGENT_RUNTIME_ARN", "")
+
+if not AGENT_RUNTIME_ARN:
+    raise ValueError("BEDROCK_AGENT_RUNTIME_ARN environment variable is required.")
 
 
 if len(sys.argv) > 1:
@@ -27,7 +32,7 @@ handler_id = client.meta.events.register_first(
 
 try:
     response = client.invoke_agent_runtime(
-        agentRuntimeArn="arn:aws:bedrock-agentcore:us-east-1:927852416082:runtime/agentcore_strands1-pr0Zo18Ulz",
+        agentRuntimeArn=AGENT_RUNTIME_ARN,
         runtimeSessionId=str(uuid.uuid4()),
         payload=payload,
         contentType="application/json",

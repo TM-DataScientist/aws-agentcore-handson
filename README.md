@@ -17,8 +17,19 @@ Amazon Bedrock AgentCore と Strands Agents を使ったローカルエージェ
 
 書籍の内容をベースにしつつ、このリポジトリには手元での検証や調整を含む差分が入る場合があります。
 
+## ディレクトリ構成
+
+- `agents/`: AgentCore のエントリポイントやエージェント実装
+- `scripts/`: 呼び出し用クライアントや補助スクリプト
+- `mcp/`: MCP サーバーとクライアント例
+- `memory/`: Memory API の検証用スクリプト
+- `config/`: エージェント設定ファイル
+- `policies/`: ポリシー JSON
+
 ## 主なファイル
 
-- `agentcore_strands1.py`: AgentCore のエントリポイント
-- `client_requests.py`: ローカル `/invocations` エンドポイントを呼び出すクライアント
+- `agents/agentcore_strands1.py`: AgentCore のメインエントリポイント
+- `agents/agent_longterm.py`: Memory を使う長期記憶エージェント。`BEDROCK_AGENTCORE_MEMORY_ID` が必要
+- `scripts/client_requests.py`: ローカル `/invocations` エンドポイントを呼び出すクライアント
+- `mcp/mcp_client3.py`: 対話式の MCP クライアント例
 - `requirements.txt`: 実行に必要な Python パッケージ一覧

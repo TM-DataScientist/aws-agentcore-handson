@@ -6,7 +6,7 @@ from bedrock_agentcore.runtime import BedrockAgentCoreApp
 from strands import Agent
 
 
-CONFIG_PATH = Path(__file__).with_name("agentcore_strands_simple_config.json")
+CONFIG_PATH = Path(__file__).resolve().parent.parent / "config" / "agentcore_strands_simple_config.json"
 
 
 def load_config() -> dict:

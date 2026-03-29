@@ -29,6 +29,7 @@ htmlcov/
 !.env.example
 
 # Logs and runtime outputs
+logs/
 *.log
 *.out
 *.stderr.log

@@ -22,4 +22,4 @@ EXPOSE 9000
 
 COPY . .
 
-CMD ["python", "-m", "agent_longterm"]
+CMD ["python", "agents/agent_longterm.py"]
