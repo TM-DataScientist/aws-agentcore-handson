@@ -1,0 +1,25 @@
+[project]
+name = "crew_app"
+version = "0.1.0"
+description = "crew_app using crewAI"
+authors = [{ name = "Your Name", email = "you@example.com" }]
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "crewai[tools]==1.12.2",
+    "lancedb==0.30.0; sys_platform == 'win32' and platform_machine == 'AMD64'",
+]
+
+[project.scripts]
+crew_app = "crew_app.main:run"
+run_crew = "crew_app.main:run"
+train = "crew_app.main:train"
+replay = "crew_app.main:replay"
+test = "crew_app.main:test"
+run_with_trigger = "crew_app.main:run_with_trigger"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.crewai]
+type = "crew"
